@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, metrics.class);
                 startActivity(intent);
                 return true;
+
+            case R.id.action_allOff:
+                // User clicked the all off button at the top
+                Toast.makeText(getApplicationContext(),"All Off Clicked",Toast.LENGTH_SHORT).show();
 
             default:
                 // If we got here, the user's action was not recognized.

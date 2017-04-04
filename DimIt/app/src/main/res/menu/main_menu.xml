@@ -1,10 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+    <item
+        android:id="@+id/action_allOff"
+        android:title="Off"
+        app:showAsAction="ifRoom"
+        />
+
     <item
         android:id="@+id/action_metrics"
         android:icon="@mipmap/graph_icon"
         android:title="Metrics"
         app:showAsAction="ifRoom"
         />
+
+
 </menu>
