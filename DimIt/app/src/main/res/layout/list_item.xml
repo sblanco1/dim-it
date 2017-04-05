@@ -28,7 +28,7 @@
             android:layout_toRightOf="@id/status_icon">
 
             <TextView
-                android:layout_marginLeft="6dp"
+                android:layout_marginLeft="10dp"
                 android:textSize="24dp"
                 android:layout_marginBottom="5dp"
                 android:id="@+id/lightTitle"
@@ -61,6 +61,7 @@
                 android:text="Smart Control" />
 
             <Switch
+                android:id="@+id/switchValue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

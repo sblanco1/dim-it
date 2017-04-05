@@ -75,11 +75,11 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<LightFixture> testList = new ArrayList<LightFixture>();
 
         LightFixture tempFixture;
-        for(int i=0; i<4; i++) {
+        for(int i=0; i<6; i++) {
             tempFixture = new LightFixture();
             tempFixture.setName("Light Fixture " + i);
-            tempFixture.setLightStatus(false);
-            tempFixture.setSmartStatus(true);
+            tempFixture.setLightStatus((i%2==0));
+            tempFixture.setSmartStatus((i%2==0));
             tempFixture.setLightValue((int)(Math.random() * 101));
             testList.add(tempFixture);
         }

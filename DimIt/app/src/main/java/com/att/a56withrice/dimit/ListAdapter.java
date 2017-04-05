@@ -1,10 +1,14 @@
 package com.att.a56withrice.dimit;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +44,15 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
         Toast.makeText(this.mContext, dataModel.getName() + " clicked.",Toast.LENGTH_SHORT).show();
     }
 
+    public void flipSmartStatus(View v) {
+        int position=(Integer) v.getTag();
+        Object object= getItem(position);
+        LightFixture dataModel = (LightFixture) object;
+
+        SeekBar lightValue = (SeekBar) v.findViewById(R.id.lightValue);
+        lightValue.setEnabled(dataModel.getSmartStatus());
+    }
+
     @Override
     public int getCount() {
         return mDataSource.size();
@@ -59,18 +72,47 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get view for row item
 
-
         View rowView = mInflater.inflate(R.layout.list_item, parent, false);
 
         // Get all the display elements from the list_item
         TextView titleTextView = (TextView) rowView.findViewById(R.id.lightTitle);
+        ImageView statusIcon = (ImageView) rowView.findViewById(R.id.status_icon);
+        SeekBar lightValue = (SeekBar) rowView.findViewById(R.id.lightValue);
+        Switch switchValue = (Switch) rowView.findViewById(R.id.switchValue);
 
-
+        // Set all the values of the UI elements to reflect the lightFixture objects
         LightFixture lightFixture = getItem(position);
         titleTextView.setText(lightFixture.getName());
+//        statusIcon.setDrawable();
 
+        lightValue.setProgress(lightFixture.getLightValue());
+        lightValue.setEnabled(lightFixture.getSmartStatus());
+
+        switchValue.setChecked(lightFixture.getSmartStatus());
+        switchValue.setOnClickListener(new SwitchListener(position, lightValue));
 
         return rowView;
     }
 
+    class SwitchListener implements View.OnClickListener {
+
+        int position;
+        SeekBar lightValue;
+
+        public SwitchListener(int position, SeekBar lightValue) {
+            this.position = position;
+            this.lightValue = lightValue;
+        }
+
+        @Override
+        public void onClick(View v) {
+            LightFixture lightFixture = getItem(position);
+            boolean smartStatus = lightFixture.getSmartStatus();
+            lightFixture.setSmartStatus(!smartStatus);
+            lightValue.setEnabled(!smartStatus);
+        }
+
+    }
 }
+
+
