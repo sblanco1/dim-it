@@ -84,6 +84,13 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
         LightFixture lightFixture = getItem(position);
         titleTextView.setText(lightFixture.getName());
 //        statusIcon.setDrawable();
+//        statusIcon.setImageResource(mContext.getApplicationContext().getResources().getDrawable(R.drawable.light_bulb_test));
+        if(lightFixture.getLightStatus()) {
+            statusIcon.setImageResource(R.drawable.light_bulb_lit);
+        }
+        else {
+            statusIcon.setImageResource(R.drawable.light_bulb_test);
+        }
 
         lightValue.setProgress(lightFixture.getLightValue());
         lightValue.setEnabled(lightFixture.getSmartStatus());

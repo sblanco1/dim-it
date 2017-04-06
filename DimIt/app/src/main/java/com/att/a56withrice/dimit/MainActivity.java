@@ -54,7 +54,12 @@ public class MainActivity extends AppCompatActivity {
 
             case R.id.action_allOff:
                 // User clicked the all off button at the top
-                Toast.makeText(getApplicationContext(),"All Off Clicked",Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getApplicationContext(),"All Off Clicked",Toast.LENGTH_SHORT).show();
+
+                for(LightFixture light : lightList) {
+                    light.setLightStatus(false);
+                }
+                listView.setAdapter(adapter);
 
             default:
                 // If we got here, the user's action was not recognized.
