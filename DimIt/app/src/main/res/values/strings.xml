@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Dim!It</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="timePrompt">Please select time frame:</string>
+
+    <string-array name="timespan">
+        <item>7 days</item>
+        <item>14 days</item>
+        <item>30 days</item>
+    </string-array>
+</resources>
