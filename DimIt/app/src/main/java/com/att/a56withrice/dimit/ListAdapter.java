@@ -127,7 +127,7 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
                 statusIcon.setImageResource(R.drawable.light_bulb_lit);
             }
             else {
-                statusIcon.setImageResource(R.drawable.light_bulb_test);
+                statusIcon.setImageResource(R.drawable.light_bulb_unlit);
             }
         }
     }
