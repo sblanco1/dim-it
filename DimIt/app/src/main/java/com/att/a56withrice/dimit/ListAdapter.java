@@ -2,6 +2,7 @@ package com.att.a56withrice.dimit;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,23 +84,54 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
         // Set all the values of the UI elements to reflect the lightFixture objects
         LightFixture lightFixture = getItem(position);
         titleTextView.setText(lightFixture.getName());
-//        statusIcon.setDrawable();
-//        statusIcon.setImageResource(mContext.getApplicationContext().getResources().getDrawable(R.drawable.light_bulb_test));
+
         if(lightFixture.getLightStatus()) {
             statusIcon.setImageResource(R.drawable.light_bulb_lit);
         }
         else {
             statusIcon.setImageResource(R.drawable.light_bulb_test);
         }
+        statusIcon.setOnClickListener(new LightListener(position, statusIcon));
+
 
         lightValue.setProgress(lightFixture.getLightValue());
         lightValue.setEnabled(lightFixture.getSmartStatus());
+
 
         switchValue.setChecked(lightFixture.getSmartStatus());
         switchValue.setOnClickListener(new SwitchListener(position, lightValue));
 
         return rowView;
     }
+
+    class LightListener implements View.OnClickListener {
+
+        int position;
+        ImageView statusIcon;
+
+        public LightListener(int position, ImageView statusIcon) {
+            this.position = position;
+            this.statusIcon = statusIcon;
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            LightFixture lightFixture = getItem(position);
+            boolean lightStatus = lightFixture.getLightStatus();
+
+            lightFixture.setLightStatus(!lightStatus);
+            // Log.e("ListAdapter", "New Light Status: " + lightFixture.getLightStatus());
+
+            if(lightFixture.getLightStatus()) {
+                statusIcon.setImageResource(R.drawable.light_bulb_lit);
+            }
+            else {
+                statusIcon.setImageResource(R.drawable.light_bulb_test);
+            }
+        }
+    }
+
 
     class SwitchListener implements View.OnClickListener {
 
