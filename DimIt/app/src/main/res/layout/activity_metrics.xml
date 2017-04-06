@@ -16,6 +16,36 @@
         tools:layout_editor_absoluteX="8dp"
         android:layout_marginRight="8dp">
 
+        <TextView
+            android:id="@+id/smartText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="11dp"
+            android:text="@string/smartKWH"
+            android:layout_below="@+id/dumbText"
+            android:layout_alignLeft="@+id/dumbText"
+            android:layout_alignStart="@+id/dumbText" />
+
+        <TextView
+            android:id="@+id/smartCalc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_alignBaseline="@+id/smartText"
+            android:layout_alignBottom="@+id/smartText"
+            android:layout_alignLeft="@+id/congratsCalc"
+            android:layout_alignStart="@+id/congratsCalc" />
+
+        <TextView
+            android:id="@+id/dumbCalc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:layout_alignBaseline="@+id/dumbText"
+            android:layout_alignBottom="@+id/dumbText"
+            android:layout_alignLeft="@+id/smartCalc"
+            android:layout_alignStart="@+id/smartCalc" />
+
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="300dp"
@@ -24,10 +54,10 @@
             android:layout_row="1"
             tools:layout_editor_absoluteX="42dp"
             tools:layout_editor_absoluteY="105dp"
+            android:layout_marginTop="24dp"
             android:layout_below="@+id/spinner"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_marginTop="45dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true">
 
@@ -39,6 +69,7 @@
                 android:layout_row="3"
                 tools:layout_editor_absoluteX="84dp"
                 tools:layout_editor_absoluteY="199dp" />
+
         </FrameLayout>
 
         <Spinner
@@ -55,6 +86,41 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/congratsText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/congrats"
+            android:layout_below="@+id/smartText"
+            android:layout_alignLeft="@+id/smartText"
+            android:layout_alignStart="@+id/smartText" />
+
+        <TextView
+            android:id="@+id/dumbText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:text="@string/dumbKWH"
+            android:layout_marginLeft="28dp"
+            android:layout_marginStart="28dp"
+            android:layout_below="@+id/frameLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/congratsCalc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:text="TextView"
+            android:layout_alignBaseline="@+id/congratsText"
+            android:layout_alignBottom="@+id/congratsText"
+            android:layout_toRightOf="@+id/congratsText"
+            android:layout_toEndOf="@+id/congratsText" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

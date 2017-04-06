@@ -8,4 +8,8 @@
         <item>14 days</item>
         <item>30 days</item>
     </string-array>
+
+    <string name="dumbKWH">Average kWh used with a \"dumb\" bulb:</string>
+    <string name="smartKWH">Average kWh used with a smart bulb:</string>
+    <string name="congrats">Based on the national average, you\'ve saved: </string>
 </resources>
