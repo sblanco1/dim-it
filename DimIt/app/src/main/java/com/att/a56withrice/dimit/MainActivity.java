@@ -21,6 +21,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.action_map:
+                Intent mapIntent = new Intent(this, MapActivity.class);
+                startActivity(mapIntent);
+                return true;
+
             case R.id.action_metrics:
                 // User clicked the metrics button at the top
                 Intent intent = new Intent(this, metrics.class);
