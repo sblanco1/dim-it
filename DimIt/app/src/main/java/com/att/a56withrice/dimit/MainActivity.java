@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -82,22 +83,17 @@ public class MainActivity extends AppCompatActivity {
 
     private ArrayList<LightFixture> generateSampleLights() {
 
+        HashMap<Integer, String> map =  buildHouseNames();
         ArrayList<LightFixture> testList = new ArrayList<LightFixture>();
 
         LightFixture tempFixture;
-        for(int i=0; i<6; i++) {
-            String name = "Light Fixture " + i;
+        for(int i=0; i<map.size(); i++) {
+            String name = map.get(i);
             boolean lightStatus = (i%2 == 0);
             boolean smartStatus = (i%2 == 0);
             int lightValue = (int)(Math.random() * 101);
 
             tempFixture = new LightFixture(name, lightValue, lightStatus, smartStatus);
-
-//            tempFixture = new LightFixture();
-//            tempFixture.setName("Light Fixture " + i);
-//            tempFixture.setLightStatus((i%2==0));
-//            tempFixture.setSmartStatus((i%2==0));
-//            tempFixture.setLightValue((int)(Math.random() * 101));
 
             if(i==0) {
                 tempFixture.setEnabled(true);
@@ -107,5 +103,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return testList;
+    }
+
+    private HashMap<Integer, String> buildHouseNames() {
+        HashMap<Integer, String> map = new HashMap<Integer, String>();
+        map.put(0, "Living Room");
+        map.put(1, "Family Room");
+        map.put(2, "Kitchen");
+        map.put(3, "Master Bedroom");
+        map.put(4, "Kid Bedroom 1");
+        map.put(5, "Kid Bedroom 2");
+        map.put(6, "Dining Room");
+
+        return map;
     }
 }

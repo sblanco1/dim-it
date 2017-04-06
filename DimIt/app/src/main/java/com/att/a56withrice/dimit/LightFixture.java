@@ -93,7 +93,12 @@ public class LightFixture {
     }
 
     public void setLightValue(int lightValue) {
+
         this.lightValue = lightValue;
+
+        if(lightStatus == true) {
+            sendNewValue(lightValue);
+        }
     }
 
     public void setEnabled(boolean enabled) {

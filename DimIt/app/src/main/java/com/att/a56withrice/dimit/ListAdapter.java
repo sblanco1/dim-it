@@ -93,9 +93,11 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
         }
         statusIcon.setOnClickListener(new LightListener(position, statusIcon));
 
-
         lightValue.setProgress(lightFixture.getLightValue());
         lightValue.setEnabled(lightFixture.getSmartStatus());
+
+        // Setting onChangeListner()
+        lightValue.setOnSeekBarChangeListener(new SeekListener(position, lightValue));
 
 
         switchValue.setChecked(lightFixture.getSmartStatus());
@@ -132,7 +134,6 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
         }
     }
 
-
     class SwitchListener implements View.OnClickListener {
 
         int position;
@@ -150,7 +151,34 @@ public class ListAdapter extends ArrayAdapter<LightFixture> implements View.OnCl
             lightFixture.setSmartStatus(!smartStatus);
             lightValue.setEnabled(!smartStatus);
         }
+    }
 
+    class SeekListener implements SeekBar.OnSeekBarChangeListener {
+
+        LightFixture lightFixture;
+        SeekBar seekBar;
+
+        public SeekListener(int position, SeekBar seekBar) {
+            this.lightFixture = getItem(position);
+            this.seekBar = seekBar;
+        }
+
+        @Override
+        public void onStopTrackingTouch(SeekBar seekBar) {
+            Toast.makeText(mContext, "FINAL PROGRESS VALUE: " + String.valueOf(seekBar.getProgress()),Toast.LENGTH_LONG).show();
+            lightFixture.setLightValue(seekBar.getProgress());
+        }
+
+        @Override
+        public void onStartTrackingTouch(SeekBar seekBar) {
+            // TODO Auto-generated method stub
+        }
+
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
+            // TODO Auto-generated method stub
+//                Toast.makeText(mContext, String.valueOf(progress),Toast.LENGTH_LONG).show();
+        }
     }
 }
 
