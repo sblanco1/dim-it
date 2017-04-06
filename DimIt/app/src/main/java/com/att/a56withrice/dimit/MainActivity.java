@@ -86,11 +86,23 @@ public class MainActivity extends AppCompatActivity {
 
         LightFixture tempFixture;
         for(int i=0; i<6; i++) {
-            tempFixture = new LightFixture();
-            tempFixture.setName("Light Fixture " + i);
-            tempFixture.setLightStatus((i%2==0));
-            tempFixture.setSmartStatus((i%2==0));
-            tempFixture.setLightValue((int)(Math.random() * 101));
+            String name = "Light Fixture " + i;
+            boolean lightStatus = (i%2 == 0);
+            boolean smartStatus = (i%2 == 0);
+            int lightValue = (int)(Math.random() * 101);
+
+            tempFixture = new LightFixture(name, lightValue, lightStatus, smartStatus);
+
+//            tempFixture = new LightFixture();
+//            tempFixture.setName("Light Fixture " + i);
+//            tempFixture.setLightStatus((i%2==0));
+//            tempFixture.setSmartStatus((i%2==0));
+//            tempFixture.setLightValue((int)(Math.random() * 101));
+
+            if(i==0) {
+                tempFixture.setEnabled(true);
+            }
+
             testList.add(tempFixture);
         }
 
