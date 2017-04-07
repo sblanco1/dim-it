@@ -12,50 +12,71 @@
     <RelativeLayout
         android:layout_width="378dp"
         android:layout_height="495dp"
-        tools:layout_editor_absoluteY="5dp"
-        tools:layout_editor_absoluteX="8dp"
-        android:layout_marginRight="8dp">
+        tools:layout_editor_absoluteX="3dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timePrompt"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="8dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/timePromptCont"
+            tools:layout_editor_absoluteX="3dp"
+            tools:layout_editor_absoluteY="25dp"
+            android:layout_below="@+id/textView3"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/smartText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="11dp"
-            android:text="@string/smartKWH"
-            android:layout_below="@+id/dumbText"
             android:layout_alignLeft="@+id/dumbText"
-            android:layout_alignStart="@+id/dumbText" />
+            android:layout_alignStart="@+id/dumbText"
+            android:layout_below="@+id/dumbText"
+            android:layout_marginTop="11dp"
+            android:text="@string/smartKWH" />
 
         <TextView
             android:id="@+id/smartCalc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:layout_alignBaseline="@+id/smartText"
             android:layout_alignBottom="@+id/smartText"
             android:layout_alignLeft="@+id/congratsCalc"
-            android:layout_alignStart="@+id/congratsCalc" />
+            android:layout_alignStart="@+id/congratsCalc"
+            android:text="TextView" />
 
         <TextView
             android:id="@+id/dumbCalc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="TextView"
             android:layout_alignBaseline="@+id/dumbText"
             android:layout_alignBottom="@+id/dumbText"
             android:layout_alignLeft="@+id/smartCalc"
-            android:layout_alignStart="@+id/smartCalc" />
+            android:layout_alignStart="@+id/smartCalc"
+            android:text="TextView" />
 
         <FrameLayout
             android:id="@+id/frameLayout"
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_column="1"
+            android:layout_marginTop="16dp"
             android:layout_row="1"
             tools:layout_editor_absoluteX="42dp"
             tools:layout_editor_absoluteY="105dp"
-            android:layout_marginTop="24dp"
-            android:layout_below="@+id/spinner"
+            android:layout_below="@+id/radioGroup"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentRight="true"
@@ -72,39 +93,22 @@
 
         </FrameLayout>
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="134dp"
-            android:layout_height="29dp"
-            android:layout_column="0"
-            android:layout_row="0"
-            android:entries="@array/timespan"
-            android:prompt="@string/timePrompt"
-            android:spinnerMode="dialog"
-            tools:layout_editor_absoluteX="234dp"
-            tools:layout_editor_absoluteY="16dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
-
         <TextView
             android:id="@+id/congratsText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/congrats"
-            android:layout_below="@+id/smartText"
             android:layout_alignLeft="@+id/smartText"
-            android:layout_alignStart="@+id/smartText" />
+            android:layout_alignStart="@+id/smartText"
+            android:layout_below="@+id/smartText"
+            android:layout_marginTop="16dp"
+            android:text="@string/congrats" />
 
         <TextView
             android:id="@+id/dumbText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="33dp"
+            android:layout_marginTop="24dp"
             android:text="@string/dumbKWH"
-            android:layout_marginLeft="28dp"
-            android:layout_marginStart="28dp"
             android:layout_below="@+id/frameLayout"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -113,13 +117,54 @@
             android:id="@+id/congratsCalc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="13dp"
-            android:layout_marginStart="13dp"
-            android:text="TextView"
             android:layout_alignBaseline="@+id/congratsText"
             android:layout_alignBottom="@+id/congratsText"
+            android:layout_marginLeft="13dp"
+            android:layout_marginStart="13dp"
+            android:layout_toEndOf="@+id/congratsText"
             android:layout_toRightOf="@+id/congratsText"
-            android:layout_toEndOf="@+id/congratsText" />
+            android:text="TextView" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checkedButton="@+id/radioButton"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/dumbText"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/dumbText"
+                android:layout_weight="1"
+                android:text="@string/opt1" />
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radioGroup"
+                android:layout_toEndOf="@+id/radioButton"
+                android:layout_toRightOf="@+id/radioButton"
+                android:layout_weight="1"
+                android:text="@string/opt2" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radioGroup"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:text="@string/opt3" />
+
+        </RadioGroup>
 
     </RelativeLayout>
 
