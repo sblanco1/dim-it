@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Dim!It</string>
     <string name="title_activity_map">MapActivity</string>
-    <string name="timePrompt">Please select time frame:</string>
+    <string name="timePrompt">Please select </string>
+    <string name="timePromptCont">time frame:</string>
 
-    <string-array name="timespan">
-        <item>7 days</item>
-        <item>14 days</item>
-        <item>30 days</item>
-    </string-array>
+    <string name="opt1">7 days</string>
+    <string name="opt2">14 days</string>
+    <string name="opt3">30 days</string>
+
+    <string name="dumbKWH">Average kWh used with a \"dumb\" bulb:</string>
+    <string name="smartKWH">Average kWh used with a smart bulb:</string>
+    <string name="congrats">Based on the national average, you\'ve saved: </string>
 </resources>
