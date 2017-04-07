@@ -39,9 +39,9 @@ import java.util.Random;
 public class metrics extends AppCompatActivity {
 
     BarChart myChart;
-    ArrayList<BarEntry> smartData = new ArrayList<>();
+    //ArrayList<BarEntry> smartData;
     BarDataSet smartSet;
-    ArrayList<BarEntry> dumbData = new ArrayList<>();
+    //ArrayList<BarEntry> dumbData;
     BarDataSet dumbSet;
     int timeSpan = 7;
     String[] time;
@@ -83,17 +83,20 @@ public class metrics extends AppCompatActivity {
         } finally {
             huc.disconnect();
         }*/
-
+        ArrayList<BarEntry> smartData = new ArrayList<>();
+        ArrayList<BarEntry> dumbData = new ArrayList<>();
         myChart = (BarChart) findViewById(R.id.chart);
         myChart.setDrawBorders(true);
         myChart.setAutoScaleMinMaxEnabled(true);
-        graphValues();
-        calculate();
+        graphValues(smartData, dumbData);
+        calculate(smartData);
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+                ArrayList<BarEntry> smartData = new ArrayList<>();
+                ArrayList<BarEntry> dumbData = new ArrayList<>();
                 RadioButton selected = (RadioButton) findViewById(radioGroup.getCheckedRadioButtonId());
                 String text = selected.getText().toString();
                 int i;
@@ -115,13 +118,13 @@ public class metrics extends AppCompatActivity {
                         i = 1;
                         break;
                 }
-                graphValues();
-                calculate();
+                graphValues(smartData, dumbData);
+                calculate(smartData);
             }
         });
     }
 
-    public void calculate() {
+    public void calculate(ArrayList<BarEntry> smartData) {
         dumbCalc = (TextView) findViewById(R.id.dumbCalc);
         Float dumbKWDay = ((timeSpan * kWday) * 10000) / 10000;
         dumbCalc.setText(dumbKWDay.toString());
@@ -141,7 +144,7 @@ public class metrics extends AppCompatActivity {
         congratsCalc.setText("$" + savings.toString());
     }
 
-    public void graphValues() {
+    public void graphValues(ArrayList<BarEntry> smartData, ArrayList<BarEntry> dumbData) {
         //for (int i = 0; i != (timeSpan + 1); ++i) {
         //for (int i = timeSpan; i >= 0; --i) {
         Random random;
