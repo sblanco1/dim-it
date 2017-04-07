@@ -1,31 +1,31 @@
 package com.att.a56withrice.dimit;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import 	android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
-import android.app.Activity;
-import android.content.ClipData;
-import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.DragShadowBuilder;
 import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class MapActivity extends AppCompatActivity implements OnTouchListener, OnDragListener {
 
     MapView map;
+    HashMap<String, String> nameMap;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,8 @@ public class MapActivity extends AppCompatActivity implements OnTouchListener, O
         findViewById(R.id.bulb_icon).setOnTouchListener(this);
         findViewById(R.id.map).setOnDragListener(this);
         map = (MapView)findViewById(R.id.drawing);
+        Intent intent = getIntent();
+        nameMap = (HashMap<String, String>)intent.getSerializableExtra("nameMap");
     }
 
     @Override
@@ -61,6 +63,52 @@ public class MapActivity extends AppCompatActivity implements OnTouchListener, O
         return true;
     }
 
+    Dialog dialog;
+    List<String> usedNames = new ArrayList<>();
+    String currentName;
+    private void showRadioButtonDialog() {
+
+        // custom dialog
+        dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.map_dialog);
+        List<String> stringList= new ArrayList<String>(nameMap.values());
+
+        RadioGroup rg = (RadioGroup) dialog.findViewById(R.id.radio_group);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                Log.e("button id->",String.valueOf(checkedId));
+                int childCount = group.getChildCount();
+                for (int x = 0; x < childCount; x++) {
+                    RadioButton btn = (RadioButton) group.getChildAt(x);
+                    if (btn.getId() == checkedId) {
+                        Log.e("selected RadioButton->",btn.getText().toString());
+                        currentName = btn.getText().toString();
+
+                    }
+                }
+            }
+        });
+
+        for(int i=0;i<stringList.size();i++){
+            if(usedNames.contains(stringList.get(i))) continue;
+            RadioButton rb=new RadioButton(this); // dynamically creating RadioButton and adding to RadioGroup.
+            rb.setText(stringList.get(i));
+            rg.addView(rb);
+        }
+
+        dialog.show();
+
+    }
+
+    public void selfDestruct(View view) {
+        usedNames.add(currentName);
+        dialog.dismiss();
+    }
+
     float dX, dY;
     @Override
     public boolean onTouch(View view, MotionEvent event) {
@@ -70,6 +118,7 @@ public class MapActivity extends AppCompatActivity implements OnTouchListener, O
 
             case MotionEvent.ACTION_DOWN:
                 map.addLight();
+                showRadioButtonDialog();
                 break;
             /*
                 dX = view.getX() - event.getRawX();

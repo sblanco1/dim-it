@@ -1,25 +1,14 @@
 package com.att.a56withrice.dimit;
 
 import android.content.Context;
-import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.text.TextPaint;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.DragEvent;
-import android.view.View;
-
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
+import android.view.View;
 
 
 public class MapView extends View {
@@ -86,6 +75,7 @@ public class MapView extends View {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         canvas.drawRect(startX, startY, pointX, pointY, drawPaint);
     }
+
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {

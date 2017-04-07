@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.action_map:
                 Intent mapIntent = new Intent(this, MapActivity.class);
+                mapIntent.putExtra("nameMap", buildHouseNames());
                 startActivity(mapIntent);
                 return true;
 
