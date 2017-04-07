@@ -34,13 +34,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Random;
 
 public class metrics extends AppCompatActivity {
 
     BarChart myChart;
-    ArrayList<BarEntry> smartData;
+    ArrayList<BarEntry> smartData = new ArrayList<>();
     BarDataSet smartSet;
-    ArrayList<BarEntry> dumbData;
+    ArrayList<BarEntry> dumbData = new ArrayList<>();
     BarDataSet dumbSet;
     int timeSpan = 7;
     String[] time;
@@ -83,13 +84,11 @@ public class metrics extends AppCompatActivity {
             huc.disconnect();
         }*/
 
-        calculate();
-
         myChart = (BarChart) findViewById(R.id.chart);
         myChart.setDrawBorders(true);
         myChart.setAutoScaleMinMaxEnabled(true);
-
         graphValues();
+        calculate();
 
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -116,8 +115,8 @@ public class metrics extends AppCompatActivity {
                         i = 1;
                         break;
                 }
-                calculate();
                 graphValues();
+                calculate();
             }
         });
     }
@@ -127,7 +126,14 @@ public class metrics extends AppCompatActivity {
         Float dumbKWDay = ((timeSpan * kWday) * 10000) / 10000;
         dumbCalc.setText(dumbKWDay.toString());
         smartCalc = (TextView) findViewById(R.id.smartCalc);
-        Float smartKWDay = 10f;
+        Float smartKWDay = 0f;
+        int skwd = 0;
+        for(int i = 0; i != timeSpan; ++i) {
+            String data = smartData.get(i).toString();
+            data = data.substring(data.lastIndexOf(":") + 2);
+            skwd = (int)(Float.parseFloat(data)*1000);
+            smartKWDay += (float)(skwd/1000);
+        }
         smartCalc.setText(smartKWDay.toString());
         congratsCalc = (TextView) findViewById(R.id.congratsCalc);
         int firstCalc = (int)((kWcost*(dumbKWDay - smartKWDay))*100);
@@ -136,14 +142,14 @@ public class metrics extends AppCompatActivity {
     }
 
     public void graphValues() {
-        smartData = new ArrayList<>();
-        dumbData = new ArrayList<>();
         //for (int i = 0; i != (timeSpan + 1); ++i) {
         //for (int i = timeSpan; i >= 0; --i) {
+        Random random;
+        float max = 30f;
         for (int i = 0; i != (timeSpan + 1); ++i) {
             //String j = dateCalc(sdf, c, today, j);
-            //
-            BarEntry smartEntry = new BarEntry(i, i);
+            random = new Random();
+            BarEntry smartEntry = new BarEntry(i, random.nextFloat()*max);
             smartData.add(smartEntry);
             BarEntry dumbEntry = new BarEntry(i, kWday);
             dumbData.add(dumbEntry);
@@ -186,7 +192,6 @@ public class metrics extends AppCompatActivity {
         myChart.setScaleEnabled(true);
         myChart.setTouchEnabled(true);
         myChart.setDragEnabled(true);
-        System.out.println("What's failing?");
         myChart.notifyDataSetChanged();
         myChart.invalidate();
     }
@@ -198,11 +203,9 @@ public class metrics extends AppCompatActivity {
         Calendar c = Calendar.getInstance();
         Date today = Calendar.getInstance().getTime();
         for(int i = 0; i != (timeSpan+1); ++i) {
-            System.out.println();
             c.setTime(today);
             c.add(Calendar.DATE, (days));
             time[i] = sdf.format(c.getTime().getTime());
-            System.out.println(time[i]);
         }
         return time;
     }
