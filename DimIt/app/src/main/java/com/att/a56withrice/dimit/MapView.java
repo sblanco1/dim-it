@@ -40,6 +40,7 @@ public class MapView extends View {
     float startX;
     float startY;
 
+    boolean addingLight = false;
 
     public MapView(Context context) {
         super(context);
@@ -52,6 +53,11 @@ public class MapView extends View {
 
     public MapView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public void addLight() {
+        addingLight = true;
+
     }
 
     private void setupDrawing(){
@@ -69,6 +75,7 @@ public class MapView extends View {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+        if (w == 0 || h == 0) return;
         canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
         drawCanvas = new Canvas(canvasBitmap);
     }
@@ -82,22 +89,46 @@ public class MapView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        pointX = event.getX();
-        pointY = event.getY();
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                startX = pointX;
-                startY = pointY;
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                break;
-            case MotionEvent.ACTION_UP:
-                drawCanvas.drawRect(startX, startY, pointX, pointY, drawPaint);
-                drawPath.reset();
-                break;
-            default:
-                return false;
+
+        if (addingLight){
+            drawPath.reset();
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    System.out.println("Adding light");
+                    Paint drawPaintCircle = new Paint();
+                    drawPaintCircle.setColor(Color.parseColor("yellow"));
+                    drawCanvas.drawCircle(event.getX(), event.getY(),50,drawPaintCircle);
+                    return true;
+                case MotionEvent.ACTION_MOVE:
+                    break;
+                case MotionEvent.ACTION_UP:
+                        addingLight = false;
+                    drawPath.reset();
+                    break;
+                default:
+                    return false;
+            }
+
+        }else{
+            pointX = event.getX();
+            pointY = event.getY();
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    startX = pointX;
+                    startY = pointY;
+                    return true;
+                case MotionEvent.ACTION_MOVE:
+                    break;
+                case MotionEvent.ACTION_UP:
+                        drawCanvas.drawRect(startX, startY, pointX, pointY, drawPaint);
+
+                    drawPath.reset();
+                    break;
+                default:
+                    return false;
+            }
         }
+
         invalidate();
         return true;
     }

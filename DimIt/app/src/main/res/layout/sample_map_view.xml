@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFCCCCCC"
@@ -35,16 +36,15 @@
 
         <ImageButton
             android:id="@+id/bulb_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:adjustViewBounds="true"
             android:contentDescription="bulb"
             android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
             android:src="@drawable/bulb" />
 
 
-
-</LinearLayout>
+    </LinearLayout>
 
     <com.att.a56withrice.dimit.MapView
         android:id="@+id/drawing"
@@ -55,6 +55,6 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="3dp"
         android:layout_weight="1"
-        android:background="#FFFFFFFF" />
+        android:background="#e0e0e0" />
 
 </LinearLayout>
