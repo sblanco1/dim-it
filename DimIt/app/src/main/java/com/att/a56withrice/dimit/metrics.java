@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -152,9 +153,9 @@ public class metrics extends AppCompatActivity {
         for (int i = 0; i != (timeSpan + 1); ++i) {
             //String j = dateCalc(sdf, c, today, j);
             random = new Random();
-            BarEntry smartEntry = new BarEntry(i, random.nextFloat()*max);
+            BarEntry smartEntry = new BarEntry((int)i, random.nextFloat()*max);
             smartData.add(smartEntry);
-            BarEntry dumbEntry = new BarEntry(i, kWday);
+            BarEntry dumbEntry = new BarEntry((int)i, kWday);
             dumbData.add(dumbEntry);
         }
 
@@ -172,6 +173,9 @@ public class metrics extends AppCompatActivity {
         dumbSet = new BarDataSet(dumbData, "\"Dumb\" bulb");
         BarData allData = new BarData(smartSet, dumbSet);
         myChart.setData(allData);
+        Description desc = new Description();
+        desc.setText("");
+        myChart.setDescription(desc);
         dumbSet.setColor(R.color.colorPrimary);
         float groupSpace = 0.06f;
         float barSpace = 0f; // x2 dataset
